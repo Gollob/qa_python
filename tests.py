@@ -46,15 +46,15 @@ class TestBooksCollector:
         collector.add_new_book('Гордость и предубеждение и зомби')
         collector.set_book_rating('Гордость и предубеждение и зомби', 0)
 
-        assert collector.get_book_rating('Гордость и предубеждение и зомби') >= 1
+        assert collector.get_book_rating('Гордость и предубеждение и зомби') != 0
 
     # Нельзя выставить рейтинг больше 10.
     def test_set_book_rating_сannot_rate_more_than_10(self):
         collector = BooksCollector()
         collector.add_new_book('Гордость и предубеждение и зомби')
-        collector.set_book_rating('Гордость и предубеждение и зомби', range(11, 999))
+        collector.set_book_rating('Гордость и предубеждение и зомби', 11)
 
-        assert collector.get_book_rating('Гордость и предубеждение и зомби') <= 10
+        assert collector.get_book_rating('Гордость и предубеждение и зомби') != 11
 
     # У не добавленной книги нет рейтинга.
     def test_get_book_rating_book_not_added_has_no_rating(self):
@@ -68,7 +68,7 @@ class TestBooksCollector:
         collector.add_new_book('Гордость и предубеждение и зомби')
         collector.add_book_in_favorites('Гордость и предубеждение и зомби')
 
-        assert collector.get_list_of_favorites_books() != None
+        assert collector.get_list_of_favorites_books() == ['Гордость и предубеждение и зомби']
 
     # Нельзя добавить книгу в избранное, если её нет в словаре books_rating.
     def test_add_book_in_favorites_you_cannot_add_book_to_favorites_if_it_is_not_in_dictionary(self):
@@ -89,8 +89,7 @@ class TestBooksCollector:
     # Вывод список книг с определенным рейтингом
     def test_get_books_with_specific_rating_displaying_list_books_with_certain_rating(self):
         collector = BooksCollector()
-        rating=range(1, 11)
         collector.add_new_book('Гордость и предубеждение и зомби')
-        collector.set_book_rating('Гордость и предубеждение и зомби', rating)
+        collector.set_book_rating('Гордость и предубеждение и зомби', 5)
 
-        assert collector.get_books_with_specific_rating(rating) != None
+        assert collector.get_books_with_specific_rating(5) == ['Гордость и предубеждение и зомби']
