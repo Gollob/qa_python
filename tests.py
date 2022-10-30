@@ -46,7 +46,7 @@ class TestBooksCollector:
         collector.add_new_book('Гордость и предубеждение и зомби')
         collector.set_book_rating('Гордость и предубеждение и зомби', 0)
 
-        assert collector.get_book_rating('Гордость и предубеждение и зомби') != 0
+        assert collector.get_book_rating('Гордость и предубеждение и зомби') == 1
 
     # Нельзя выставить рейтинг больше 10.
     def test_set_book_rating_сannot_rate_more_than_10(self):
@@ -54,7 +54,7 @@ class TestBooksCollector:
         collector.add_new_book('Гордость и предубеждение и зомби')
         collector.set_book_rating('Гордость и предубеждение и зомби', 11)
 
-        assert collector.get_book_rating('Гордость и предубеждение и зомби') != 11
+        assert collector.get_book_rating('Гордость и предубеждение и зомби') == 1
 
     # У не добавленной книги нет рейтинга.
     def test_get_book_rating_book_not_added_has_no_rating(self):
